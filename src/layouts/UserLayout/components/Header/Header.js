@@ -15,8 +15,13 @@ import {
     Container,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { FaUtensils, FaBars } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { blue } from "@mui/material/colors";
+
+import { logo } from "~/assets/Images";
+import { Login as LoginIcon } from "@mui/icons-material";
+
+const navItems = ["Menu", "About Us", "Locations", "Events", "Contact"];
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
     backgroundColor: "#ffffff",
@@ -26,7 +31,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 const LogoImage = styled("img")({
     height: "60px",
     cursor: "pointer",
-    objectFit: "contain",
+    objectFit: "fill",
 });
 
 const NavLink = styled(Typography)(({ theme }) => ({
@@ -56,8 +61,6 @@ function Header() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-    const navItems = ["Menu", "About Us", "Locations", "Events", "Contact"];
-
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -65,7 +68,15 @@ function Header() {
     const drawer = (
         <List>
             {navItems.map((item) => (
-                <ListItem button key={item}>
+                <ListItem
+                    sx={{
+                        "&:hover": {
+                            backgroundColor: "#f5f5f5",
+                            cursor: "pointer",
+                        },
+                    }}
+                    key={item}
+                >
                     <ListItemText
                         primary={item}
                         primaryTypographyProps={{
@@ -77,23 +88,21 @@ function Header() {
             <ListItem>
                 <ReservationButton
                     variant="contained"
-                    startIcon={<FaUtensils />}
+                    startIcon={<LoginIcon />}
                     fullWidth
                 >
-                    Make a Reservation
+                    Đăng nhập
                 </ReservationButton>
             </ListItem>
         </List>
     );
 
     return (
-        <StyledAppBar position="sticky">
-            <Container maxWidth="xl">
+        <StyledAppBar position="fixed">
+            <Container>
                 <Toolbar disableGutters>
-                    <LogoImage
-                        src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5"
-                        alt="Restaurant Logo"
-                    />
+                    {/* Logo */}
+                    <LogoImage src={logo} alt="Restaurant Logo" />
 
                     {isMobile ? (
                         <>
@@ -142,9 +151,9 @@ function Header() {
                             </Box>
                             <ReservationButton
                                 variant="contained"
-                                startIcon={<FaUtensils />}
+                                startIcon={<LoginIcon />}
                             >
-                                Make a Reservation
+                                Đăng nhập
                             </ReservationButton>
                         </>
                     )}
