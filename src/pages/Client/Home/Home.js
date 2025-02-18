@@ -3,18 +3,24 @@ import Slideshow from "~/components/Slideshow";
 const slides = [
     {
         content: "Content 1",
-        image: "https://images.pexels.com/photos/1632790/pexels-photo-1632790.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        image: "https://png.pngtree.com/background/20210710/original/pngtree-recruitment-background-banner-picture-image_1037995.jpg",
         alt: "",
+        width: "1200px",
+        height: "220px",
     },
     {
         content: "Content 1",
-        image: "https://static.vecteezy.com/system/resources/previews/007/623/233/non_2x/3d-illustration-education-tablet-with-education-icons-on-on-hi-tech-background-education-banner-vector.jpg",
+        image: "https://png.pngtree.com/background/20210709/original/pngtree-recruitment-gradient-first-place-banner-picture-image_925518.jpg",
         alt: "",
+        width: "1200px",
+        height: "220px",
     },
     {
         content: "Content 1",
-        image: "https://static.vecteezy.com/system/resources/previews/007/623/233/non_2x/3d-illustration-education-tablet-with-education-icons-on-on-hi-tech-background-education-banner-vector.jpg",
+        image: "https://png.pngtree.com/background/20210710/original/pngtree-recruitment-background-banner-picture-image_1034730.jpg",
         alt: "",
+        width: "1200px",
+        height: "220px",
     },
 ];
 
