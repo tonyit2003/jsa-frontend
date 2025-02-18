@@ -216,7 +216,7 @@ const Register = () => {
         setError("");
 
         try {
-            const res = await registerUser(
+            await registerUser(
                 fullname,
                 email,
                 password,
@@ -224,7 +224,7 @@ const Register = () => {
                 removeDots(phoneNumber),
                 jobSeeker ? "candidate" : "recruiter"
             );
-            console.log(res);
+            navigate(config.routes.login);
         } catch (error) {
             if (
                 error.response &&
@@ -266,6 +266,7 @@ const Register = () => {
                         label="Email"
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         InputProps={{
@@ -282,6 +283,7 @@ const Register = () => {
                         label="Họ và tên"
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập họ và tên"
                         value={fullname}
                         onChange={(e) => setFullname(e.target.value)}
                         InputProps={{
@@ -299,6 +301,7 @@ const Register = () => {
                         label="Số điện thoại"
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập số điện thoại"
                         value={phoneNumber}
                         onChange={handlePhoneChange}
                         InputProps={{
@@ -317,6 +320,7 @@ const Register = () => {
                         type={showPassword ? "text" : "password"}
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập mật khẩu"
                         value={password}
                         onChange={handlePasswordChange}
                         InputProps={{
@@ -353,6 +357,7 @@ const Register = () => {
                         type={showRePassword ? "text" : "password"}
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập lại mật khẩu"
                         value={rePassword}
                         error={errorRePassword !== ""}
                         helperText={errorRePassword}
