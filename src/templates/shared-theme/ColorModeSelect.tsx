@@ -20,7 +20,7 @@ export default function ColorModeSelect(props: SelectProps) {
             }}
             {...props}
         >
-            <MenuItem value="system">System</MenuItem>
+            <MenuItem value="system">Hệ thống</MenuItem>
             <MenuItem value="light">Sáng</MenuItem>
             <MenuItem value="dark">Tối</MenuItem>
         </Select>

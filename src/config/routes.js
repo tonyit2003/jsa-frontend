@@ -2,9 +2,9 @@ const routes = {
     home: "/",
     loginAdmin: '/admin',
     dashboard: '/admin/dashboard',
-    users: '/admin/users',
-    roles: '/admin/roles',
-    permissions: '/admin/permissions',
+    userManagement: '/admin/userManagement',
+    browseJobPostings: '/admin/browseJobPostings',
+    browseAccount: '/admin/browseAccount',
     settings: '/admin/settings',
 };
 
