@@ -18,6 +18,7 @@ import { MdVisibility, MdVisibilityOff, MdEmail, MdLock } from "react-icons/md";
 import { logo as logoIcon } from "~/assets/Images";
 import { useNavigate } from "react-router-dom";
 import config from "~/config";
+import { loginUser } from "~/services/UserService";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
     display: "flex",
@@ -81,28 +82,10 @@ const SocialButton = styled(Button)(({ theme }) => ({
     fontSize: "16px",
 }));
 
-const PasswordStrengthMeter = styled(Box)(({ strength }) => ({
-    height: "4px",
-    width: "100%",
-    background: "#e0e0e0",
-    position: "relative",
-    marginTop: "8px",
-    "&::before": {
-        content: '""',
-        position: "absolute",
-        height: "100%",
-        width: `${strength}%`,
-        background:
-            strength < 33 ? "#f44336" : strength < 66 ? "#ffa726" : "#66bb6a",
-        transition: "width 0.3s ease",
-    },
-}));
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [passwordStrength, setPasswordStrength] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -116,20 +99,9 @@ const Login = () => {
         navigate(config.routes.register);
     };
 
-    const calculatePasswordStrength = (pass) => {
-        let strength = 0;
-        if (pass.length > 6) strength += 20;
-        if (pass.match(/[A-Z]/)) strength += 20;
-        if (pass.match(/[0-9]/)) strength += 20;
-        if (pass.match(/[^A-Za-z0-9]/)) strength += 20;
-        if (pass.length > 10) strength += 20;
-        return strength;
-    };
-
     const handlePasswordChange = (e) => {
         const newPassword = e.target.value;
         setPassword(newPassword);
-        setPasswordStrength(calculatePasswordStrength(newPassword));
     };
 
     const handleSubmit = async (e) => {
@@ -138,12 +110,23 @@ const Login = () => {
         setError("");
 
         try {
-            // Simulated API call
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            // Add your actual login logic here
-            console.log("Login successful");
-        } catch (err) {
-            setError("Invalid credentials. Please try again.");
+            const res = await loginUser(email, password);
+            if (res.token) {
+                localStorage.setItem("token", res.token);
+                navigate(config.routes.home);
+            } else {
+                setError("Đăng nhập không thành công. Hãy thử lại sau.");
+            }
+        } catch (error) {
+            if (
+                error.response &&
+                error.response.data &&
+                error.response.data.message
+            ) {
+                setError(error.response.data.message);
+            } else {
+                setError("Đăng nhập không thành công. Hãy thử lại sau.");
+            }
         } finally {
             setLoading(false);
         }
@@ -174,6 +157,7 @@ const Login = () => {
                         label="Email"
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         InputProps={{
@@ -191,6 +175,7 @@ const Login = () => {
                         type={showPassword ? "text" : "password"}
                         variant="outlined"
                         margin="normal"
+                        placeholder="Nhập mật khẩu"
                         value={password}
                         onChange={handlePasswordChange}
                         InputProps={{
@@ -217,8 +202,6 @@ const Login = () => {
                             ),
                         }}
                     />
-
-                    <PasswordStrengthMeter strength={passwordStrength} />
 
                     <Button
                         fullWidth

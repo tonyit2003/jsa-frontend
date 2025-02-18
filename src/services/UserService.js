@@ -1,11 +1,15 @@
 const { default: httpRequest } = require("~/utils/httpRequest");
 
-// export const loginUser = async (email, password) => {
-//     return await httpRequest.post("login", {
-//         email,
-//         password,
-//     });
-// };
+export const loginUser = async (email, password) => {
+    return await httpRequest.post("login", {
+        email,
+        password,
+    });
+};
+
+export const logoutUser = async () => {
+    return await httpRequest.post("logout");
+};
 
 export const registerUser = async (
     full_name,
