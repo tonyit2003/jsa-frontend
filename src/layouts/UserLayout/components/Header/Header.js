@@ -17,9 +17,11 @@ import {
 import { styled } from "@mui/system";
 import { FaBars } from "react-icons/fa";
 import { blue } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 import { logo } from "~/assets/Images";
 import { Login as LoginIcon } from "@mui/icons-material";
+import config from "~/config";
 
 const navItems = ["Menu", "About Us", "Locations", "Events", "Contact"];
 
@@ -60,9 +62,14 @@ function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const navigate = useNavigate();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
+    };
+
+    const redirectLogin = () => {
+        navigate(config.routes.login);
     };
 
     const drawer = (
@@ -90,6 +97,7 @@ function Header() {
                     variant="contained"
                     startIcon={<LoginIcon />}
                     fullWidth
+                    onClick={redirectLogin}
                 >
                     Đăng nhập
                 </ReservationButton>
@@ -152,6 +160,7 @@ function Header() {
                             <ReservationButton
                                 variant="contained"
                                 startIcon={<LoginIcon />}
+                                onClick={redirectLogin}
                             >
                                 Đăng nhập
                             </ReservationButton>

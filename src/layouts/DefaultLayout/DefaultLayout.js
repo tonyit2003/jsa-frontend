@@ -1,7 +1,8 @@
+import { Container } from "@mui/material";
 import PropTypes from "prop-types";
 
 function DefaultLayout({ children }) {
-    return <div>{children}</div>;
+    return <Container>{children}</Container>;
 }
 
 DefaultLayout.propTypes = {

@@ -38,7 +38,9 @@ function Slideshow({ slides = [] }) {
                         <img
                             alt={slide.alt || ""}
                             src={slide.image || ""}
-                            width={"100%"}
+                            width="100%"
+                            height={"220px"}
+                            style={{ objectFit: "fill" }}
                         />
                         <div className={cx("text")}>{slide.content || ""}</div>
                     </div>
@@ -50,7 +52,6 @@ function Slideshow({ slides = [] }) {
                     ❯
                 </button>
             </div>
-            <br />
             <div style={{ textAlign: "center" }}>
                 {slides.map((slide, index) => {
                     return (
