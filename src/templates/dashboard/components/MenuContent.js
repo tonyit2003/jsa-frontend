@@ -12,15 +12,21 @@ import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
-import { DashboardRounded } from '@mui/icons-material';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
+import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
+import DynamicFeedRoundedIcon from '@mui/icons-material/DynamicFeedRounded';
+import RememberMeRoundedIcon from '@mui/icons-material/RememberMeRounded';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import config from "../../../config";
 
 const mainListItems = [
-  { text: 'Thống kê', icon: <DashboardRounded />, path: config.routes.dashboard },
-  { text: 'QL Người dùng', icon: <AnalyticsRoundedIcon />, path: config.routes.userManagement },
-  { text: 'Duyệt tin', icon: <PeopleRoundedIcon />, path: config.routes.browseJobPostings },
+  { text: 'Thống kê', icon: <DashboardRoundedIcon />, path: config.routes.dashboard },
+  { text: 'Người tìm việc', icon: <SupervisedUserCircleRoundedIcon />, path: config.routes.userCandidate },
+  { text: 'Nhà tuyển dụng', icon: <GroupRoundedIcon />, path: config.routes.userRecruiter },
+  { text: 'Thành viên', icon: <RememberMeRoundedIcon />, path: config.routes.userMember },
+  { text: 'Duyệt tin', icon: <DynamicFeedRoundedIcon />, path: config.routes.browseJobPostings },
   { text: 'Duyệt tài khoản', icon: <AssignmentRoundedIcon />, path: config.routes.browseAccount },
 ];
 

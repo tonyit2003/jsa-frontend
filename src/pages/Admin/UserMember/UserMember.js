@@ -1,9 +1,9 @@
-import { Box, Stack } from "@mui/material";
+import { alpha, Box, Stack } from "@mui/material";
 import Header from "~/templates/dashboard/components/Header";
 import MainGrid from "~/templates/dashboard/components/MainGrid";
-import { alpha } from '@mui/material/styles';
+import DataTable from "./UserMemberTable";
 
-function Dashboard() {
+function UserMember() {
     return (
         <Box
             component="main"
@@ -25,10 +25,11 @@ function Dashboard() {
                 }}
             >
                 <Header />
+                <DataTable />
                 {/* <MainGrid /> */}
             </Stack>
         </Box>
     );
 }
 
-export default Dashboard;
+export default UserMember;

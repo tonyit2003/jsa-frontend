@@ -1,11 +1,11 @@
 import { alpha, Box, Stack } from "@mui/material";
 import Header from "~/templates/dashboard/components/Header";
 import MainGrid from "~/templates/dashboard/components/MainGrid";
-import DataTable from "./UserManagementTable";
+import DataTable from "./UserRecruiterTable";
 
-function UserManagement() {
+function UserRecruiter() {
     return (
-        <Box 
+        <Box
             component="main"
             sx={(theme) => ({
                 flexGrow: 1,
@@ -32,4 +32,4 @@ function UserManagement() {
     );
 }
 
-export default UserManagement;
+export default UserRecruiter;

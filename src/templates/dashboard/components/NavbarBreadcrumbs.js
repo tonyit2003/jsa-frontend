@@ -23,7 +23,9 @@ export default function NavbarBreadcrumbs() {
   // Danh sách breadcrumb theo route
   const breadcrumbsConfig = {
     [config.routes.dashboard]: ["Trang chủ", "Thống kê"],
-    [config.routes.userManagement]: ["Trang chủ", "Quản lý người dùng"],
+    [config.routes.userCandidate]: ["Trang chủ", "Quản lý người tìm việc"],
+    [config.routes.userRecruiter]: ["Trang chủ", "Quản lý nhà tuyển dụng"],
+    [config.routes.userMember]: ["Trang chủ", "Quản lý thành viên"],
     [config.routes.browseJobPostings]: ["Trang chủ", "Duyệt tin"],
     [config.routes.browseAccount]: ["Trang chủ", "Duyệt tài khoản"],
     "/settings": ["Trang chủ", "Cài đặt"],
