@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
     Box,
     Button,
@@ -15,10 +15,12 @@ import {
 import { styled } from "@mui/system";
 import { FaGoogle, FaGithub, FaApple } from "react-icons/fa";
 import { MdVisibility, MdVisibilityOff, MdEmail, MdLock } from "react-icons/md";
-import { logo as logoIcon } from "~/assets/Images";
 import { useNavigate } from "react-router-dom";
+
+import { logo as logoIcon } from "~/assets/Images";
 import config from "~/config";
 import { loginUser } from "~/services/UserService";
+import { UserContext } from "~/context/UserProvider";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
     display: "flex",
@@ -89,6 +91,9 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    // eslint-disable-next-line no-unused-vars
+    const { auth, setAuth } = useContext(UserContext);
+
     const navigate = useNavigate();
 
     const redirectHome = () => {
@@ -111,8 +116,18 @@ const Login = () => {
 
         try {
             const res = await loginUser(email, password);
-            if (res.token) {
-                localStorage.setItem("token", res.token);
+            if (res.token && res.user) {
+                localStorage.setItem(
+                    process.env.REACT_APP_AUTH_TOKEN_KEY,
+                    res.token
+                );
+                setAuth({
+                    isAuth: true,
+                    full_name: res.user.full_name,
+                    email: res.user.email,
+                    phone_number: res.user.phone_number,
+                    user_type: res.user.user_type,
+                });
                 navigate(config.routes.home);
             } else {
                 setError("Đăng nhập không thành công. Hãy thử lại sau.");

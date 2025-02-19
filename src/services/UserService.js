@@ -7,8 +7,20 @@ export const loginUser = async (email, password) => {
     });
 };
 
-export const logoutUser = async () => {
-    return await httpRequest.post("logout");
+export const getUserByToken = async (token) => {
+    return await httpRequest.get("getUser", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
+export const logoutUser = async (token) => {
+    return await httpRequest.get("logout", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 };
 
 export const registerUser = async (

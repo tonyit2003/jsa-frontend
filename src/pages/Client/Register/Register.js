@@ -32,6 +32,7 @@ import {
     removeDots,
 } from "~/utils/helper";
 import { registerUser } from "~/services/UserService";
+import userType from "~/constants/userType";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
     display: "flex",
@@ -222,7 +223,7 @@ const Register = () => {
                 password,
                 rePassword,
                 removeDots(phoneNumber),
-                jobSeeker ? "candidate" : "recruiter"
+                jobSeeker ? userType.CANDIDATE : userType.RECRUITER
             );
             navigate(config.routes.login);
         } catch (error) {

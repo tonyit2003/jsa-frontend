@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
     AppBar,
     Toolbar,
@@ -18,12 +18,12 @@ import { styled } from "@mui/system";
 import { FaBars } from "react-icons/fa";
 import { blue } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
+import { Login as LoginIcon } from "@mui/icons-material";
 
 import { logo } from "~/assets/Images";
-import { Login as LoginIcon } from "@mui/icons-material";
 import config from "~/config";
-
-const navItems = ["Menu", "About Us", "Locations", "Events", "Contact"];
+import { UserContext } from "~/context/UserProvider";
+import { logoutUser } from "~/services/UserService";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
     backgroundColor: "#ffffff",
@@ -48,6 +48,7 @@ const NavLink = styled(Typography)(({ theme }) => ({
 }));
 
 const ReservationButton = styled(Button)(({ theme }) => ({
+    textTransform: "none",
     backgroundColor: blue[600],
     color: "#ffffff",
     padding: "8px 24px",
@@ -64,6 +65,9 @@ function Header() {
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const navigate = useNavigate();
 
+    // eslint-disable-next-line no-unused-vars
+    const { auth, setAuth } = useContext(UserContext);
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -72,9 +76,49 @@ function Header() {
         navigate(config.routes.login);
     };
 
+    const redirectHome = () => {
+        navigate(config.routes.home);
+    };
+
+    const handleLogout = async () => {
+        const token = localStorage.getItem(
+            process.env.REACT_APP_AUTH_TOKEN_KEY
+        );
+        if (!token) {
+            return;
+        }
+        try {
+            const res = await logoutUser(token);
+            if (res.status && res.status === "success") {
+                setAuth({
+                    isAuth: false,
+                    full_name: "",
+                    email: "",
+                    phone_number: "",
+                    user_type: "",
+                });
+                localStorage.removeItem(process.env.REACT_APP_AUTH_TOKEN_KEY);
+                navigate(config.routes.login);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    let navItems = [
+        {
+            text: "Trang chủ",
+            onClick: redirectHome,
+        },
+    ];
+
+    if (auth.isAuth) {
+        navItems = [...navItems, { text: "Đăng xuất", onClick: handleLogout }];
+    }
+
     const drawer = (
         <List>
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
                 <ListItem
                     sx={{
                         "&:hover": {
@@ -82,25 +126,34 @@ function Header() {
                             cursor: "pointer",
                         },
                     }}
-                    key={item}
+                    key={index}
                 >
                     <ListItemText
-                        primary={item}
+                        primary={item.text}
                         primaryTypographyProps={{
                             style: { color: "#333333", fontWeight: 500 },
+                        }}
+                        onClick={() => {
+                            item.onClick();
                         }}
                     />
                 </ListItem>
             ))}
             <ListItem>
-                <ReservationButton
-                    variant="contained"
-                    startIcon={<LoginIcon />}
-                    fullWidth
-                    onClick={redirectLogin}
-                >
-                    Đăng nhập
-                </ReservationButton>
+                {auth.isAuth ? (
+                    <ReservationButton variant="p" onClick={redirectLogin}>
+                        {auth.email}
+                    </ReservationButton>
+                ) : (
+                    <ReservationButton
+                        variant="contained"
+                        startIcon={<LoginIcon />}
+                        fullWidth
+                        onClick={redirectLogin}
+                    >
+                        Đăng nhập
+                    </ReservationButton>
+                )}
             </ListItem>
         </List>
     );
@@ -145,25 +198,37 @@ function Header() {
                                     justifyContent: "center",
                                 }}
                             >
-                                {navItems.map((item) => (
+                                {navItems.map((item, index) => (
                                     <NavLink
                                         variant="body1"
-                                        key={item}
+                                        key={index}
                                         role="button"
                                         tabIndex={0}
                                         aria-label={item}
+                                        onClick={() => {
+                                            item.onClick();
+                                        }}
                                     >
-                                        {item}
+                                        {item.text}
                                     </NavLink>
                                 ))}
                             </Box>
-                            <ReservationButton
-                                variant="contained"
-                                startIcon={<LoginIcon />}
-                                onClick={redirectLogin}
-                            >
-                                Đăng nhập
-                            </ReservationButton>
+                            {auth.isAuth ? (
+                                <ReservationButton
+                                    variant="p"
+                                    onClick={redirectLogin}
+                                >
+                                    {auth.email}
+                                </ReservationButton>
+                            ) : (
+                                <ReservationButton
+                                    variant="contained"
+                                    startIcon={<LoginIcon />}
+                                    onClick={redirectLogin}
+                                >
+                                    Đăng nhập
+                                </ReservationButton>
+                            )}
                         </>
                     )}
                 </Toolbar>
