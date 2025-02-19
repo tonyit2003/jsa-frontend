@@ -16,7 +16,7 @@ function UserCandidate() {
 
     useEffect(() => {
         getUsers(page);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]); // Gọi API mỗi khi page thay đổi
 
     const getUsers = async (page) => {
