@@ -5,3 +5,7 @@ export const getPaginationUserRecruiter = async (page = 1, perPage = 10) => {
         params: { page, per_page: perPage },
     });
 };
+
+export const deleteUserRecruiter = async (id) => {
+    return await httpRequest.delete(`delete-user-recruiter/${id}`);
+};

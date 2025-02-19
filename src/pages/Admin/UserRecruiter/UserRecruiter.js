@@ -2,7 +2,7 @@ import { alpha, Box, Pagination, Stack } from "@mui/material";
 import Header from "~/templates/dashboard/components/Header";
 import DataTable from "./UserRecruiterTable";
 import { useEffect, useState } from "react";
-import { getPaginationUserRecruiter } from "~/services/UserRecruiterService";
+import { getPaginationUserRecruiter, deleteUserRecruiter } from "~/services/UserRecruiterService";
 
 function UserRecruiter() {
     const [listUserRecruiter, setListUserRecruiter] = useState([]);
@@ -34,6 +34,31 @@ function UserRecruiter() {
         }
     }
 
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa doanh nghiệp này không?");
+        if (!confirmDelete) return;
+
+        try {
+            await deleteUserRecruiter(id);
+            alert("Xóa thành công!");
+
+            // Gọi lại API để kiểm tra danh sách sau khi xóa
+            let res = await getPaginationUserRecruiter(page);
+            const usersArray = res?.data?.users || res?.data?.data || res?.data || [];
+
+            // Nếu trang hiện tại rỗng sau khi xóa và page > 1, thì giảm page xuống 1
+            if (usersArray.length === 0 && page > 1) {
+                setPage((prevPage) => prevPage - 1);
+            } else {
+                // Nếu trang vẫn còn dữ liệu, chỉ cần cập nhật dữ liệu mới
+                getUsers(page);
+            }
+        } catch (error) {
+            console.error("Lỗi khi xóa doanh nghiệp:", error);
+            alert("Xóa không thành công. Vui lòng thử lại!");
+        }
+    };
+
     return (
         <Box
             component="main"
@@ -55,7 +80,7 @@ function UserRecruiter() {
                 }}
             >
                 <Header />
-                <DataTable rows={listUserRecruiter} onPageChange={setPage} />
+                <DataTable rows={listUserRecruiter} onPageChange={setPage} onDelete={handleDelete} />
                 <Pagination
                     count={totalPage}
                     page={page}
