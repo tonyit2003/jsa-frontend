@@ -5,3 +5,7 @@ export const getPaginationUsersCandidate = async (page = 1, perPage = 10) => {
         params: { page, per_page: perPage },
     });
 };
+
+export const deleteUserCandidate = async (id) => {
+    return await httpRequest.delete(`delete-user-candidate/${id}`);
+};

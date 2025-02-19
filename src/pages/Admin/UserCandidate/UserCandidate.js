@@ -2,7 +2,7 @@ import { alpha, Box, Stack } from "@mui/material";
 import Header from "~/templates/dashboard/components/Header";
 import DataTable from "./UserCandidateTable";
 import { useEffect, useState } from "react";
-import { getPaginationUsersCandidate } from "~/services/UserCandidateService";
+import { getPaginationUsersCandidate, deleteUserCandidate } from "~/services/UserCandidateService";
 import Pagination from '@mui/material/Pagination';
 
 function UserCandidate() {
@@ -16,6 +16,7 @@ function UserCandidate() {
 
     useEffect(() => {
         getUsers(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]); // Gọi API mỗi khi page thay đổi
 
     const getUsers = async (page) => {
@@ -34,6 +35,31 @@ function UserCandidate() {
         }
     };
 
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa ứng viên này không?");
+        if (!confirmDelete) return;
+
+        try {
+            await deleteUserCandidate(id);
+            alert("Xóa thành công!");
+
+            // Gọi lại API để kiểm tra danh sách sau khi xóa
+            let res = await getPaginationUsersCandidate(page);
+            const usersArray = res?.data?.users || res?.data?.data || res?.data || [];
+
+            // Nếu trang hiện tại rỗng sau khi xóa và page > 1, thì giảm page xuống 1
+            if (usersArray.length === 0 && page > 1) {
+                setPage((prevPage) => prevPage - 1);
+            } else {
+                // Nếu trang vẫn còn dữ liệu, chỉ cần cập nhật dữ liệu mới
+                getUsers(page);
+            }
+        } catch (error) {
+            console.error("Lỗi khi xóa ứng viên:", error);
+            alert("Xóa không thành công. Vui lòng thử lại!");
+        }
+    };
+
     return (
         <Box
             component="main"
@@ -47,7 +73,7 @@ function UserCandidate() {
         >
             <Stack spacing={2} sx={{ alignItems: 'center', mx: 3, pb: 5, mt: { xs: 8, md: 0 } }}>
                 <Header />
-                <DataTable rows={listUsersCandidate} onPageChange={setPage} />
+                <DataTable rows={listUsersCandidate} onPageChange={setPage} onDelete={handleDelete} />
                 <Pagination
                     count={totalPage}
                     page={page}
