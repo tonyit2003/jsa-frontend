@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import Slideshow from "~/components/Slideshow";
+import userType from "~/constants/userType";
+import { UserContext } from "~/context/UserProvider";
 
 const slides = [
     {
@@ -25,6 +28,14 @@ const slides = [
 ];
 
 function Home() {
+    const { auth, setAuth } = useContext(UserContext);
+
+    const HomePage = null;
+
+    if (auth.isAuth && auth.user_type === userType.CANDIDATE) {
+        
+    }
+
     return (
         <div style={{ height: 1000 }}>
             <Slideshow slides={slides || []} />

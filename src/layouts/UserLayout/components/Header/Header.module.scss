@@ -1,0 +1,11 @@
+.auth-info {
+    color: #fff;
+    background-color: #1e88e5;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #1565c0;
+    }
+}
