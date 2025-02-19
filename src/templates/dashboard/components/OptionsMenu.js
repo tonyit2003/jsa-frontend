@@ -11,12 +11,22 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from './MenuButton';
 
+import { logoutUser } from "./../../../services/UserService";
+import { UserContext } from "./../../../context/UserProvider";
+import { useNavigate } from 'react-router-dom';
+import config from "./../../../config";
+
 const MenuItem = styled(MuiMenuItem)({
   margin: '2px 0',
 });
 
 export default function OptionsMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  // eslint-disable-next-line no-unused-vars
+  const { auth, setAuth } = React.useContext(UserContext);
+  const navigate = useNavigate();
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,6 +34,34 @@ export default function OptionsMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = async () => {
+    handleClose();
+
+    const token = localStorage.getItem(
+      process.env.REACT_APP_AUTH_TOKEN_KEY
+    );
+    if (!token) {
+      return;
+    }
+    try {
+      const res = await logoutUser(token);
+      if (res.status && res.status === "success") {
+        setAuth({
+          isAuth: false,
+          full_name: "",
+          email: "",
+          phone_number: "",
+          user_type: "",
+        });
+        localStorage.removeItem(process.env.REACT_APP_AUTH_TOKEN_KEY);
+        navigate(config.routes.loginAdmin);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <MenuButton
@@ -53,14 +91,14 @@ export default function OptionsMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Thông tin</MenuItem>
+        <MenuItem onClick={handleClose}>Tài khoản</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>Add another account</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}>Thêm tài khoản</MenuItem>
+        <MenuItem onClick={handleClose}>Cài đặt</MenuItem>
         <Divider />
         <MenuItem
-          onClick={handleClose}
+          onClick={handleLogout}
           sx={{
             [`& .${listItemIconClasses.root}`]: {
               ml: 'auto',
@@ -68,7 +106,7 @@ export default function OptionsMenu() {
             },
           }}
         >
-          <ListItemText>Logout</ListItemText>
+          <ListItemText>Đăng xuất</ListItemText>
           <ListItemIcon>
             <LogoutRoundedIcon fontSize="small" />
           </ListItemIcon>

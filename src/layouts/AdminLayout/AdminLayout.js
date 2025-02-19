@@ -11,6 +11,7 @@ import {
     datePickersCustomizations,
     treeViewCustomizations,
 } from '~/templates/dashboard/theme/customizations';
+import { UserContext } from '~/context/UserProvider';
 
 const xThemeComponents = {
     ...chartsCustomizations,
@@ -20,11 +21,13 @@ const xThemeComponents = {
 };
 
 export default function AdminLayout({ props, children }) {
+    const { auth } = React.useContext(UserContext); // Lấy thông tin đăng nhập từ UserContext
+
     return (
         <AppTheme {...props} themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
             <Box sx={{ display: 'flex' }}>
-                <SideMenu />
+                <SideMenu auth={auth}/>
                 <AppNavbar />
                 <>{children}</>
             </Box>

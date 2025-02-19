@@ -1,9 +1,9 @@
 import { Box, Stack } from "@mui/material";
 import Header from "~/templates/dashboard/components/Header";
-import MainGrid from "~/templates/dashboard/components/MainGrid";
 import { alpha } from '@mui/material/styles';
 
 function Dashboard() {
+
     return (
         <Box
             component="main"
@@ -25,7 +25,6 @@ function Dashboard() {
                 }}
             >
                 <Header />
-                {/* <MainGrid /> */}
             </Stack>
         </Box>
     );

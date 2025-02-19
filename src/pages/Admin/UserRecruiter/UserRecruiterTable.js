@@ -70,6 +70,7 @@ export default function DataTable({rows}) {
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
                 sx={{ border: 0 }}
+                hideFooter
             />
         </Paper>
     );

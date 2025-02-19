@@ -11,8 +11,9 @@ import MenuContent from './MenuContent';
 import CardAlert from './CardAlert';
 import OptionsMenu from './OptionsMenu';
 import { logo2 } from "~/assets/Images";
+import { Link } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 265;
 
 const Drawer = styled(MuiDrawer)({
   width: drawerWidth,
@@ -25,7 +26,7 @@ const Drawer = styled(MuiDrawer)({
   },
 });
 
-export default function SideMenu() {
+export default function SideMenu({ auth }) {
   return (
     <Drawer
       variant="permanent"
@@ -44,7 +45,9 @@ export default function SideMenu() {
         }}
       >
         {/* <SelectContent /> */}
-        <img style={{ width: '100%', height: 120, objectFit: 'cover' }} src={logo2} alt="" />
+        <Link to="/admin/dashboard">
+          <img style={{ width: '100%', height: 135, objectFit: 'cover' }} src={logo2} alt="Logo" />
+        </Link>
       </Box>
       <Divider />
       <Box
@@ -76,10 +79,10 @@ export default function SideMenu() {
         />
         <Box sx={{ mr: 'auto' }}>
           <Typography variant="body2" sx={{ fontWeight: 500, lineHeight: '16px' }}>
-            Riley Carter
+            {auth.full_name}
           </Typography>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            riley@email.com
+            {auth.email}
           </Typography>
         </Box>
         <OptionsMenu />

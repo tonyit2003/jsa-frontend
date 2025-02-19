@@ -1,4 +1,6 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import config from "~/config";
+import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import UserLayout from "~/layouts/UserLayout";
 import Home from "~/pages/Client/Home";
 import Dashboard from "~/pages/Admin/Dashboard";
@@ -17,14 +19,14 @@ const publicRoutes = [
     // Client
     { path: config.routes.home, component: Home, layout: UserLayout },
     { path: config.routes.login, component: Login, layout: DefaultLayout },
-    {
-        path: config.routes.register,
-        component: Register,
-        layout: DefaultLayout,
-    },
+    { path: config.routes.register, component: Register, layout: DefaultLayout },
 
-    // Admin
+    // Admin - Để đăng nhập admin
     { path: config.routes.loginAdmin, component: LoginAdmin },
+];
+
+const adminRoutes = [
+    // Các trang admin cần đăng nhập mới truy cập được
     {
         path: config.routes.dashboard,
         component: Dashboard,
@@ -56,6 +58,5 @@ const publicRoutes = [
         layout: AdminLayout,
     },
 ];
-const privateRoutes = [];
 
-export { publicRoutes, privateRoutes };
+export { publicRoutes, adminRoutes };
