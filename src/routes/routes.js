@@ -12,6 +12,8 @@ import UserMember from "~/pages/Admin/UserMember";
 import Login from "~/pages/Client/Login";
 import DefaultLayout from "~/layouts";
 import Register from "~/pages/Client/Register";
+import CreateJobPosting from "~/pages/Client/CreateJobPosting";
+import AccessDenied from "~/pages/Client/Status/AccessDenied";
 
 const publicRoutes = [
     // Client
@@ -55,7 +57,17 @@ const publicRoutes = [
         component: BrowseAccount,
         layout: AdminLayout,
     },
-];
-const privateRoutes = [];
 
-export { publicRoutes, privateRoutes };
+    // Status
+    { path: config.routes.accessDenied, component: AccessDenied },
+];
+
+const recruiterRoutes = [
+    {
+        path: config.routes.createJobPosting,
+        component: CreateJobPosting,
+        layout: UserLayout,
+    },
+];
+
+export { publicRoutes, recruiterRoutes };

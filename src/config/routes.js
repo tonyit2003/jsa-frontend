@@ -3,6 +3,7 @@ const routes = {
     home: "/",
     login: "/login",
     register: "/register",
+    createJobPosting: "/create-job-posting",
 
     // Admin
     loginAdmin: "/admin",
@@ -16,6 +17,9 @@ const routes = {
     roles: "/admin/roles",
     permissions: "/admin/permissions",
     settings: "/admin/settings",
+
+    //Status
+    accessDenied: "/403",
 };
 
 export default routes;

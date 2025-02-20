@@ -169,6 +169,7 @@ const Login = () => {
 
                     <TextField
                         fullWidth
+                        name="email"
                         label="Email"
                         variant="outlined"
                         margin="normal"
@@ -186,6 +187,7 @@ const Login = () => {
 
                     <TextField
                         fullWidth
+                        name="password"
                         label="Mật khẩu"
                         type={showPassword ? "text" : "password"}
                         variant="outlined"
