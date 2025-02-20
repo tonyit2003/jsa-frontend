@@ -14,6 +14,8 @@ import DefaultLayout from "~/layouts";
 import Register from "~/pages/Client/Register";
 import CreateJobPosting from "~/pages/Client/CreateJobPosting";
 import AccessDenied from "~/pages/Client/Status/AccessDenied";
+import AddUserAdmin from "~/pages/Admin/UserMember/AddUserAdmin";
+import EditUserAdmin from "~/pages/Admin/UserMember/EditUserAdmin";
 
 const publicRoutes = [
     // Client
@@ -59,6 +61,16 @@ const adminRoutes = [
     {
         path: config.routes.browseAccount,
         component: BrowseAccount,
+        layout: AdminLayout,
+    },
+    {
+        path: config.routes.addUserAdmin,
+        component: AddUserAdmin,
+        layout: AdminLayout,
+    },
+    {
+        path: config.routes.editUserAdmin,
+        component: EditUserAdmin,
         layout: AdminLayout,
     },
 
