@@ -1,6 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import config from "~/config";
-import ProtectedAdminRoute from "./ProtectedAdminRoute";
 import UserLayout from "~/layouts/UserLayout";
 import Home from "~/pages/Client/Home";
 import Dashboard from "~/pages/Admin/Dashboard";
@@ -14,12 +12,18 @@ import UserMember from "~/pages/Admin/UserMember";
 import Login from "~/pages/Client/Login";
 import DefaultLayout from "~/layouts";
 import Register from "~/pages/Client/Register";
+import CreateJobPosting from "~/pages/Client/CreateJobPosting";
+import AccessDenied from "~/pages/Client/Status/AccessDenied";
 
 const publicRoutes = [
     // Client
     { path: config.routes.home, component: Home, layout: UserLayout },
     { path: config.routes.login, component: Login, layout: DefaultLayout },
-    { path: config.routes.register, component: Register, layout: DefaultLayout },
+    {
+        path: config.routes.register,
+        component: Register,
+        layout: DefaultLayout,
+    },
 
     // Admin - Để đăng nhập admin
     { path: config.routes.loginAdmin, component: LoginAdmin },
@@ -57,6 +61,17 @@ const adminRoutes = [
         component: BrowseAccount,
         layout: AdminLayout,
     },
+
+    // Status
+    { path: config.routes.accessDenied, component: AccessDenied },
 ];
 
-export { publicRoutes, adminRoutes };
+const recruiterRoutes = [
+    {
+        path: config.routes.createJobPosting,
+        component: CreateJobPosting,
+        layout: UserLayout,
+    },
+];
+
+export { publicRoutes, recruiterRoutes, adminRoutes };
