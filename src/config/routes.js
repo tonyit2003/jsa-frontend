@@ -17,6 +17,8 @@ const routes = {
     roles: "/admin/roles",
     permissions: "/admin/permissions",
     settings: "/admin/settings",
+    addUserAdmin: "/admin/addUserAdmin",
+    editUserAdmin: "/admin/editUserAdmin/:id",
 
     //Status
     accessDenied: "/403",

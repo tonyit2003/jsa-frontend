@@ -19,13 +19,14 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
 
 export default function NavbarBreadcrumbs() {
   const location = useLocation(); // Lấy pathname của trang hiện tại
-
+  const isEditUserAdmin = location.pathname.startsWith("/admin/editUserAdmin");
   // Danh sách breadcrumb theo route
   const breadcrumbsConfig = {
     [config.routes.dashboard]: ["Trang chủ", "Thống kê"],
     [config.routes.userCandidate]: ["Trang chủ", "Quản lý người tìm việc"],
     [config.routes.userRecruiter]: ["Trang chủ", "Quản lý nhà tuyển dụng"],
     [config.routes.userMember]: ["Trang chủ", "Quản lý thành viên"],
+    [config.routes.addUserAdmin]: ["Trang chủ", "Thêm thành viên"],
     [config.routes.browseJobPostings]: ["Trang chủ", "Duyệt tin"],
     [config.routes.browseAccount]: ["Trang chủ", "Duyệt tài khoản"],
     "/settings": ["Trang chủ", "Cài đặt"],
@@ -34,7 +35,8 @@ export default function NavbarBreadcrumbs() {
   };
 
   // Lấy breadcrumb theo pathname, nếu không có thì mặc định là ["Trang chủ"]
-  const currentBreadcrumbs = breadcrumbsConfig[location.pathname] || ["Trang chủ"];
+  const currentBreadcrumbs =
+    isEditUserAdmin ? ["Trang chủ", "Sửa thành viên"] : breadcrumbsConfig[location.pathname] || ["Trang chủ"];
 
   return (
     <StyledBreadcrumbs
