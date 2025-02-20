@@ -6,7 +6,9 @@ function UserLayout({ children }) {
     return (
         <>
             <Header />
-            <Container sx={{ marginTop: "65px" }}>{children}</Container>
+            <Container maxWidth={"fixed"} sx={{ marginTop: "80px" }}>
+                {children}
+            </Container>
         </>
     );
 }

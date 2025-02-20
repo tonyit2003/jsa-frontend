@@ -7,6 +7,7 @@ function UserProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [auth, setAuth] = useState({
         isAuth: false,
+        token: "",
         full_name: "",
         email: "",
         phone_number: "",
@@ -31,6 +32,7 @@ function UserProvider({ children }) {
             if (res.user && res.status === "success") {
                 setAuth({
                     isAuth: true,
+                    token,
                     full_name: res.user.full_name,
                     email: res.user.email,
                     phone_number: res.user.phone_number,
@@ -40,6 +42,7 @@ function UserProvider({ children }) {
         } catch (error) {
             setAuth({
                 isAuth: false,
+                token: "",
                 full_name: "",
                 email: "",
                 phone_number: "",

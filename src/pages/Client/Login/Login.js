@@ -123,6 +123,7 @@ const Login = () => {
                 );
                 setAuth({
                     isAuth: true,
+                    token: res.token,
                     full_name: res.user.full_name,
                     email: res.user.email,
                     phone_number: res.user.phone_number,

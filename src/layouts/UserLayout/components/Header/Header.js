@@ -163,7 +163,11 @@ function Header() {
             <Container>
                 <Toolbar disableGutters>
                     {/* Logo */}
-                    <LogoImage src={logo} alt="Restaurant Logo" />
+                    <LogoImage
+                        onClick={redirectHome}
+                        src={logo}
+                        alt="Restaurant Logo"
+                    />
 
                     {isMobile ? (
                         <>

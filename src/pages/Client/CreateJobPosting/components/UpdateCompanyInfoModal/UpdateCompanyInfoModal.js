@@ -9,7 +9,7 @@ import {
     Grid2,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 
 const StyledModal = styled(Modal)(({ theme }) => ({
@@ -58,7 +58,12 @@ const SubscribeButton = styled(Button)({
     },
 });
 
-const UpdateCompanyInfoModal = ({ isOpen, handleClose, handleSubmit }) => {
+const UpdateCompanyInfoModal = ({
+    isOpen,
+    handleClose,
+    handleSubmit,
+    data,
+}) => {
     const isMobile = useMediaQuery("(max-width:600px)");
 
     const [name, setName] = useState("");
@@ -71,6 +76,14 @@ const UpdateCompanyInfoModal = ({ isOpen, handleClose, handleSubmit }) => {
         setDescription("");
         handleClose();
     };
+
+    useLayoutEffect(() => {
+        if (data) {
+            setName(data.name);
+            setWebsite(data.website);
+            setDescription(data.description);
+        }
+    }, [data]);
 
     return (
         <>

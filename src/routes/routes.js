@@ -27,6 +27,9 @@ const publicRoutes = [
 
     // Admin - Để đăng nhập admin
     { path: config.routes.loginAdmin, component: LoginAdmin },
+
+    // Status
+    { path: config.routes.accessDenied, component: AccessDenied },
 ];
 
 const adminRoutes = [
@@ -61,9 +64,6 @@ const adminRoutes = [
         component: BrowseAccount,
         layout: AdminLayout,
     },
-
-    // Status
-    { path: config.routes.accessDenied, component: AccessDenied },
 ];
 
 const recruiterRoutes = [

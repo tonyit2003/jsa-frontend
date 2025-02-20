@@ -9,6 +9,15 @@ export const getPaginationUserRecruiter = async (page = 1, perPage = 10) => {
 export const deleteUserRecruiter = async (id) => {
     return await httpRequest.delete(`delete-user-recruiter/${id}`);
 };
+
+export const getCompanyInformation = async (token) => {
+    return await httpRequest.get("get-company-information", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
 export const updateCompanyInformation = async (
     token,
     company_name,
