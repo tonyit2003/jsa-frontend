@@ -2,7 +2,6 @@ import {
     Button,
     FormControl,
     Grid2,
-    InputAdornment,
     InputLabel,
     MenuItem,
     Paper,
@@ -13,7 +12,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertCustomize from "~/components/AlertCustomize";
 import ConfirmationModal from "~/components/ConfirmationModal";
-import NumberFormatCustom from "~/components/NumberFormatCustom";
 import TextEditor from "~/components/TextEditor";
 import config from "~/config";
 import jobTypeList from "~/constants/jobTypeList";
@@ -221,14 +219,6 @@ function RecruitmentInformation() {
                                 onChange={(e) => {
                                     setSalary(e.target.value);
                                     setErrors({ ...errors, salary: "" });
-                                }}
-                                InputProps={{
-                                    inputComponent: NumberFormatCustom,
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            triệu
-                                        </InputAdornment>
-                                    ),
                                 }}
                             />
                         </Grid2>

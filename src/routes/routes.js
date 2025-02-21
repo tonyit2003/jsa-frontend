@@ -14,6 +14,7 @@ import DefaultLayout from "~/layouts";
 import Register from "~/pages/Client/Register";
 import CreateJobPosting from "~/pages/Client/CreateJobPosting";
 import AccessDenied from "~/pages/Client/Status/AccessDenied";
+import JobPostDetail from "~/pages/Client/JobPostDetail";
 
 const publicRoutes = [
     // Client
@@ -23,6 +24,11 @@ const publicRoutes = [
         path: config.routes.register,
         component: Register,
         layout: DefaultLayout,
+    },
+    {
+        path: config.routes.jobPostDetail,
+        component: JobPostDetail,
+        layout: UserLayout,
     },
 
     // Admin - Để đăng nhập admin

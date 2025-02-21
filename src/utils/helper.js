@@ -28,3 +28,19 @@ export const calculatePasswordStrength = (pass) => {
     if (pass.length > 10) strength += 20;
     return strength;
 };
+
+export const formatNumber = (value) => {
+    const number = Number(value);
+    if (isNaN(number)) {
+        return value;
+    }
+    return number.toLocaleString("vi-VN");
+};
+
+export const formatISODate = (isoString) => {
+    const date = new Date(isoString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};

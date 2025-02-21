@@ -26,3 +26,15 @@ export const insertJobPost = async (
         }
     );
 };
+
+export const getJobPostPagination = async (page) => {
+    return await httpRequest.get("get-job-post", {
+        params: { page },
+    });
+};
+
+export const getJobPostDetail = async (jobPostId) => {
+    return await httpRequest.get("get-job-post-detail", {
+        params: { jobPostId },
+    });
+};

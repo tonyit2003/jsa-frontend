@@ -1,6 +1,5 @@
-import { Grid2 } from "@mui/material";
-import RecruitmentPost from "~/components/RecruitmentPost";
 import Slideshow from "~/components/Slideshow";
+import JobPostList from "./components/JobPostList";
 
 const slides = [
     {
@@ -30,17 +29,7 @@ function CandidateHome() {
     return (
         <div>
             <Slideshow slides={slides} />
-            <Grid2 container spacing={1}>
-                <Grid2 size={4}>
-                    <RecruitmentPost />
-                </Grid2>
-                <Grid2 size={4}>
-                    <RecruitmentPost />
-                </Grid2>
-                <Grid2 size={4}>
-                    <RecruitmentPost />
-                </Grid2>
-            </Grid2>
+            <JobPostList />
         </div>
     );
 }
