@@ -40,3 +40,22 @@ export const registerUser = async (
         user_type,
     });
 };
+
+export const updateInformation = async (
+    token,
+    full_name,
+    phone_number,
+) => {
+    return await httpRequest.post(
+        "update-information",
+        {
+            full_name,
+            phone_number,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+};
