@@ -26,9 +26,9 @@ const mainListItems = [
 ];
 
 const secondaryListItems = [
-  { text: 'Settings', icon: <SettingsRoundedIcon /> },
+  { text: 'Cài đặt', icon: <SettingsRoundedIcon /> },
   { text: 'About', icon: <InfoRoundedIcon /> },
-  { text: 'Feedback', icon: <HelpRoundedIcon /> },
+  { text: 'Phản hồi', icon: <HelpRoundedIcon /> },
 ];
 
 export default function MenuContent() {

@@ -59,7 +59,6 @@ export default function SideMenu({ auth }) {
         }}
       >
         <MenuContent />
-        <CardAlert />
       </Box>
       <Stack
         direction="row"
