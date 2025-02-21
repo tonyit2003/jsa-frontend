@@ -5,8 +5,7 @@ import Dashboard from "~/pages/Admin/Dashboard";
 import LoginAdmin from "~/pages/Admin/Login";
 import AdminLayout from "~/layouts/AdminLayout";
 import UserCandidate from "~/pages/Admin/UserCandidate";
-import BrowseJobPostings from "~/pages/Admin/BrowseJobPostings";
-import BrowseAccount from "~/pages/Admin/BrowseAccount";
+import JobPost from "~/pages/Admin/JobPost";
 import UserRecruiter from "~/pages/Admin/UserRecruiter";
 import UserMember from "~/pages/Admin/UserMember";
 import Login from "~/pages/Client/Login";
@@ -16,6 +15,7 @@ import CreateJobPosting from "~/pages/Client/CreateJobPosting";
 import AccessDenied from "~/pages/Client/Status/AccessDenied";
 import AddUserAdmin from "~/pages/Admin/UserMember/AddUserAdmin";
 import EditUserAdmin from "~/pages/Admin/UserMember/EditUserAdmin";
+import BrowserJobPost from "~/pages/Admin/JobPost/BrowserJobPost";
 
 const publicRoutes = [
     // Client
@@ -57,13 +57,13 @@ const adminRoutes = [
         layout: AdminLayout,
     },
     {
-        path: config.routes.browseJobPostings,
-        component: BrowseJobPostings,
+        path: config.routes.jobPost,
+        component: JobPost,
         layout: AdminLayout,
     },
     {
-        path: config.routes.browseAccount,
-        component: BrowseAccount,
+        path: config.routes.browserJobPost,
+        component: BrowserJobPost,
         layout: AdminLayout,
     },
     {

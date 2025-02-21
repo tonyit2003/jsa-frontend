@@ -20,6 +20,7 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
 export default function NavbarBreadcrumbs() {
   const location = useLocation(); // Lấy pathname của trang hiện tại
   const isEditUserAdmin = location.pathname.startsWith("/admin/editUserAdmin");
+  const isBrowserJobPost = location.pathname.startsWith("/admin/browserJobPost");
   // Danh sách breadcrumb theo route
   const breadcrumbsConfig = {
     [config.routes.dashboard]: ["Trang chủ", "Thống kê"],
@@ -27,16 +28,23 @@ export default function NavbarBreadcrumbs() {
     [config.routes.userRecruiter]: ["Trang chủ", "Quản lý nhà tuyển dụng"],
     [config.routes.userMember]: ["Trang chủ", "Quản lý thành viên"],
     [config.routes.addUserAdmin]: ["Trang chủ", "Thêm thành viên"],
-    [config.routes.browseJobPostings]: ["Trang chủ", "Duyệt tin"],
-    [config.routes.browseAccount]: ["Trang chủ", "Duyệt tài khoản"],
+    [config.routes.jobPost]: ["Trang chủ", "Bài tuyển dụng"],
+    [config.routes.browserJobPost]: ["Trang chủ", "Duyệt bài tuyển dụng"],
     "/settings": ["Trang chủ", "Cài đặt"],
     "/about": ["Trang chủ", "Giới thiệu"],
     "/feedback": ["Trang chủ", "Phản hồi"],
   };
 
+  let currentBreadcrumbs;
+
   // Lấy breadcrumb theo pathname, nếu không có thì mặc định là ["Trang chủ"]
-  const currentBreadcrumbs =
-    isEditUserAdmin ? ["Trang chủ", "Sửa thành viên"] : breadcrumbsConfig[location.pathname] || ["Trang chủ"];
+  if (isEditUserAdmin) {
+    currentBreadcrumbs = ["Trang chủ", "Sửa thành viên"]
+  } else if (isBrowserJobPost) {
+    currentBreadcrumbs = ["Trang chủ", "Duyệt bài tuyển dụng"]
+  } else {
+    currentBreadcrumbs = breadcrumbsConfig[location.pathname] || ["Trang chủ"]
+  }
 
   return (
     <StyledBreadcrumbs

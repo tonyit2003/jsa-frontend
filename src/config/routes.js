@@ -10,8 +10,7 @@ const routes = {
     userCandidate: "/admin/userCandidate",
     userRecruiter: "/admin/userRecruiter",
     userMember: "/admin/userMember",
-    browseJobPostings: "/admin/browseJobPostings",
-    browseAccount: "/admin/browseAccount",
+    jobPost: "/admin/jobPost",
     dashboard: "/admin/dashboard",
     users: "/admin/users",
     roles: "/admin/roles",
@@ -19,6 +18,7 @@ const routes = {
     settings: "/admin/settings",
     addUserAdmin: "/admin/addUserAdmin",
     editUserAdmin: "/admin/editUserAdmin/:id",
+    browserJobPost: "/admin/browserJobPost/:id",
 
     //Status
     accessDenied: "/403",

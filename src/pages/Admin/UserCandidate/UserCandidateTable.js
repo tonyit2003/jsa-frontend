@@ -55,7 +55,6 @@ export default function DataTable({ rows, onPageChange, onDelete }) {
                 hideFooter
                 paginationModel={paginationModel}
                 onPaginationModelChange={handlePageChange}
-                checkboxSelection
                 sx={{ border: 0 }}
             />
         </Paper>

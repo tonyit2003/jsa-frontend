@@ -3,13 +3,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { Box, IconButton, Stack, Tooltip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import OpenInBrowserIcon from '@mui/icons-material/OpenInBrowser';
 
 const totalWidth = 1580;
-
-const handleBrowser = (id) => {
-    console.log(`Edit candidate with id: ${id}`);
-};
 
 const columns = (handleDelete) => [
     {
@@ -33,11 +28,6 @@ const columns = (handleDelete) => [
         renderCell: (params) => (
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', height: '100%' }}>
                 <Stack direction="row" spacing={1} alignItems="center">
-                    <Tooltip title="Duyệt bài">
-                        <IconButton color="primary" onClick={() => handleBrowser(params.row.id)}>
-                            <OpenInBrowserIcon />
-                        </IconButton>
-                    </Tooltip>
                     <Tooltip title="Xóa">
                         <IconButton color="error" onClick={() => handleDelete(params.row.id)}>
                             <DeleteIcon />
@@ -66,7 +56,6 @@ export default function DataTable({ rows, onPageChange, onDelete }) {
                 hideFooter
                 paginationModel={paginationModel}
                 onPaginationModelChange={handlePageChange}
-                checkboxSelection
                 sx={{ border: 0 }}
             />
         </Paper>

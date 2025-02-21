@@ -1,9 +1,8 @@
 import { alpha, Box, Stack } from "@mui/material";
 import Header from "~/templates/dashboard/components/Header";
-import MainGrid from "~/templates/dashboard/components/MainGrid";
-import DataTable from "./BrowseJobPostingTable";
+import FormBrowserJobPost from "./FormBrowserJobPost";
 
-function BrowseJobPostings() {
+function BrowserJobPost() {
     return (
         <Box
             component="main"
@@ -25,11 +24,10 @@ function BrowseJobPostings() {
                 }}
             >
                 <Header />
-                <DataTable />
-                {/* <MainGrid /> */}
+                <FormBrowserJobPost />
             </Stack>
         </Box>
     );
 }
 
-export default BrowseJobPostings;
+export default BrowserJobPost;

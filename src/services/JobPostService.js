@@ -26,3 +26,25 @@ export const insertJobPost = async (
         }
     );
 };
+
+// Lấy danh sách bài viết tuyển dụng
+export const getPaginationJobPost = async (page = 1, perPage = 10) => {
+    return await httpRequest.get("jobPost", {
+        params: { page, per_page: perPage },
+    });
+};
+
+export const getInfoJobPostById = async (id) => {
+    return await httpRequest.get("get-information-job-post", {
+        params: { id },
+    });
+};
+
+export const browserJobPost = async (
+    id,
+    status
+) => {
+    return await httpRequest.put(`browser-job-post/${id}`, {
+        status
+    });
+};
