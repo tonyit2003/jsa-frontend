@@ -24,6 +24,7 @@ import { logo } from "~/assets/Images";
 import config from "~/config";
 import { UserContext } from "~/context/UserProvider";
 import { logoutUser } from "~/services/UserService";
+import userType from "~/constants/userType";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
     backgroundColor: "#ffffff",
@@ -80,6 +81,14 @@ function Header() {
         navigate(config.routes.home);
     };
 
+    const redirectAccount = (id) => {
+        if (!auth.isAuth || auth.user_type !== userType.CANDIDATE) {
+            navigate(config.routes.login);
+        } else {
+            navigate(config.routes.info);
+        }
+    };
+
     const handleLogout = async () => {
         const token = localStorage.getItem(
             process.env.REACT_APP_AUTH_TOKEN_KEY
@@ -109,6 +118,10 @@ function Header() {
         {
             text: "Trang chủ",
             onClick: redirectHome,
+        },
+        {
+            text: "Tài khoản",
+            onClick: redirectAccount,
         },
     ];
 

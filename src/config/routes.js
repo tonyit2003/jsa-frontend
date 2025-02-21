@@ -4,6 +4,7 @@ const routes = {
     login: "/login",
     register: "/register",
     createJobPosting: "/create-job-posting",
+    info: "/info",
 
     // Admin
     loginAdmin: "/admin",

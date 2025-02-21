@@ -16,10 +16,12 @@ import AccessDenied from "~/pages/Client/Status/AccessDenied";
 import AddUserAdmin from "~/pages/Admin/UserMember/AddUserAdmin";
 import EditUserAdmin from "~/pages/Admin/UserMember/EditUserAdmin";
 import BrowserJobPost from "~/pages/Admin/JobPost/BrowserJobPost";
+import CandidateProfile from "~/pages/Client/CandidateProfile";
 
 const publicRoutes = [
     // Client
     { path: config.routes.home, component: Home, layout: UserLayout },
+    { path: config.routes.info, component: CandidateProfile, layout: UserLayout },
     { path: config.routes.login, component: Login, layout: DefaultLayout },
     {
         path: config.routes.register,
