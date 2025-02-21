@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from "react";
 import {
     Box,
     Card,
     CardContent,
-    CardMedia,
     Typography,
     Button,
-    Grid,
-    CircularProgress,
     styled,
 } from "@mui/material";
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
 import {
     Apartment,
     LocationOnOutlined,
     MonetizationOnOutlined,
 } from "@mui/icons-material";
+
+import { formatNumber } from "~/utils/helper";
+import { useNavigate } from "react-router-dom";
 
 const StyledCard = styled(Card)(({ theme }) => ({
     height: "100%",
@@ -44,21 +42,34 @@ const StyledButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-const RecruitmentPost = () => {
-    const [loading, setLoading] = useState({});
+const RecruitmentPost = ({
+    jobPostId,
+    titleJob,
+    companyName,
+    salary,
+    address,
+}) => {
+    const navigate = useNavigate();
 
-    const handleRegister = async (eventId) => {
-        setLoading((prev) => ({ ...prev, [eventId]: true }));
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setLoading((prev) => ({ ...prev, [eventId]: false }));
+    const handleRegister = () => {
+        navigate(`/job-post-detail/${jobPostId}`);
     };
 
     return (
-        <Box sx={{ flexGrow: 1, p: 3 }}>
+        <Box sx={{ flexGrow: 1 }}>
             <StyledCard>
                 <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                        Nhân Viên Thương Mại Điện Tử (E-Commerce)
+                    <Typography
+                        variant="h5"
+                        component="h2"
+                        gutterBottom
+                        sx={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                        }}
+                    >
+                        {titleJob}
                     </Typography>
 
                     <Box
@@ -69,8 +80,15 @@ const RecruitmentPost = () => {
                         }}
                     >
                         <Apartment style={{ marginRight: "8px" }} />
-                        <Typography variant="body2">
-                            Công Ty TNHH Đồ Gỗ Nghĩa Sơn
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                            }}
+                        >
+                            {companyName}
                         </Typography>
                     </Box>
 
@@ -84,7 +102,7 @@ const RecruitmentPost = () => {
                         <MonetizationOnOutlined
                             style={{ marginRight: "8px" }}
                         />
-                        <Typography variant="body2">12.000.000</Typography>
+                        <Typography variant="body2">{salary}</Typography>
                     </Box>
 
                     <Box
@@ -95,21 +113,11 @@ const RecruitmentPost = () => {
                         }}
                     >
                         <LocationOnOutlined style={{ marginRight: "8px" }} />
-                        <Typography variant="body2">Đồng Nai</Typography>
+                        <Typography variant="body2">{address}</Typography>
                     </Box>
 
-                    <StyledButton
-                        fullWidth
-                        // onClick={() => handleRegister(event.id)}
-                        // disabled={loading[event.id]}
-                        // aria-label={`Register for ${event.name}`}
-                    >
-                        {/* {loading[event.id] ? (
-                                <CircularProgress size={24} color="inherit" />
-                            ) : (
-                                "Register Now"
-                            )} */}
-                        Đăng ký ngay
+                    <StyledButton fullWidth onClick={() => handleRegister()}>
+                        Xem chi tiết
                     </StyledButton>
                 </CardContent>
             </StyledCard>

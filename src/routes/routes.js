@@ -16,6 +16,7 @@ import AccessDenied from "~/pages/Client/Status/AccessDenied";
 import AddUserAdmin from "~/pages/Admin/UserMember/AddUserAdmin";
 import EditUserAdmin from "~/pages/Admin/UserMember/EditUserAdmin";
 import BrowserJobPost from "~/pages/Admin/JobPost/BrowserJobPost";
+import JobPostDetail from "~/pages/Client/JobPostDetail";
 
 const publicRoutes = [
     // Client
@@ -25,6 +26,11 @@ const publicRoutes = [
         path: config.routes.register,
         component: Register,
         layout: DefaultLayout,
+    },
+    {
+        path: config.routes.jobPostDetail,
+        component: JobPostDetail,
+        layout: UserLayout,
     },
 
     // Admin - Để đăng nhập admin

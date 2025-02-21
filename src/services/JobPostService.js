@@ -40,11 +40,19 @@ export const getInfoJobPostById = async (id) => {
     });
 };
 
-export const browserJobPost = async (
-    id,
-    status
-) => {
+export const browserJobPost = async (id, status) => {
     return await httpRequest.put(`browser-job-post/${id}`, {
-        status
+        status,
+    });
+};
+export const getJobPostPagination = async (page) => {
+    return await httpRequest.get("get-job-post", {
+        params: { page },
+    });
+};
+
+export const getJobPostDetail = async (jobPostId) => {
+    return await httpRequest.get("get-job-post-detail", {
+        params: { jobPostId },
     });
 };
