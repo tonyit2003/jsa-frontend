@@ -18,6 +18,17 @@ export const getInfoCandidate = async (token) => {
     });
 };
 
+export const checkApply = async (token, job_id) => {
+    return await httpRequest.get("check-apply", {
+        params: {
+            job_id,
+        },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+};
+
 export const updateInformationCandidate = async (
     token,
     resume,
@@ -31,8 +42,20 @@ export const updateInformationCandidate = async (
             resume,
             skills,
             experience,
-            education
+            education,
         },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+};
+
+export const apply = async (token, job_id) => {
+    return await httpRequest.post(
+        "apply",
+        { job_id },
         {
             headers: {
                 Authorization: `Bearer ${token}`,
