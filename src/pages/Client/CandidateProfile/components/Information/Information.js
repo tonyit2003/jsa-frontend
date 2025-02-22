@@ -67,7 +67,7 @@ function Information() {
                     alignItems={"center"}
                 >
                     <Typography variant="h6" fontWeight="bold">
-                        Thông tin chung
+                        Thông cá nhân
                     </Typography>
                     <Grid>
                         <Button

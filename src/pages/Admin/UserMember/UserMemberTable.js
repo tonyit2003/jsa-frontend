@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import config from '~/config';
 
 export default function DataTable({ rows, onPageChange, onDelete }) {
-    const [paginationModel, setPaginationModel] = React.useState({ page: 0, pageSize: 10 });
     const navigate = useNavigate();
 
     const handleAdd = () => {
