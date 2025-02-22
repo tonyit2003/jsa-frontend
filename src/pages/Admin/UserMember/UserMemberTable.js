@@ -56,11 +56,6 @@ export default function DataTable({ rows, onPageChange, onDelete }) {
         },
     ];
 
-    const handlePageChange = (params) => {
-        setPaginationModel({ ...paginationModel, page: params.page });
-        onPageChange(params.page + 1);
-    };
-
     return (
         <>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
@@ -80,8 +75,6 @@ export default function DataTable({ rows, onPageChange, onDelete }) {
                     rows={rows}
                     columns={columns}
                     hideFooter
-                    paginationModel={paginationModel}
-                    onPaginationModelChange={handlePageChange}
                     sx={{ border: 0 }}
                 />
             </Paper>

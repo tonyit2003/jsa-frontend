@@ -9,10 +9,6 @@ function UserRecruiter() {
     const [totalPage, setTotalPage] = useState(1);
     const [page, setPage] = useState(1);
 
-    function createDate(id, full_name, email, phone_number, company_name, company_description, company_website) {
-        return { id, full_name, email, phone_number, company_name, company_description, company_website };
-    }
-
     useEffect(() => {
         getUsers(page);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -22,11 +18,7 @@ function UserRecruiter() {
         try {
             let res = await getPaginationUserRecruiter(page);
             if (res && res.data) {
-                const userArray = res.data.users || res.data.data || res.data;
-                const formattedData = userArray.map((userRecruiter) =>
-                    createDate(userRecruiter.id, userRecruiter.full_name, userRecruiter.email, userRecruiter.phone_number, userRecruiter.company_name, userRecruiter.company_description, userRecruiter.company_website)
-                );
-                setListUserRecruiter(formattedData);
+                setListUserRecruiter(res.data);
                 setTotalPage(res.meta.last_page);
             }
         } catch (error) {

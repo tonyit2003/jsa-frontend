@@ -9,10 +9,6 @@ function UserMember() {
     const [totalPage, setTotalPage] = useState(1);
     const [page, setPage] = useState(1);
 
-    function createData(id, full_name, email, phone_number) {
-        return { id, full_name, email, phone_number };
-    }
-
     useEffect(() => {
         getUsers(page);
         // eslint-disable-next-line react-hooks/exhaustive-deps     
@@ -23,11 +19,7 @@ function UserMember() {
 
         try {
             if (res && res.data) {
-                const usersArray = res.data.users || res.data.data || res.data;
-                const formattedData = usersArray.map((userAdmin) =>
-                    createData(userAdmin.id, userAdmin.full_name, userAdmin.email, userAdmin.phone_number)
-                );
-                setListUserMember(formattedData);
+                setListUserMember(res.data);
                 setTotalPage(res.meta.last_page);
             }
         } catch (error) {

@@ -109,21 +109,12 @@ export default function DataTable({ rows, onPageChange }) {
         },
     ];
 
-    const [paginationModel, setPaginationModel] = React.useState({ page: 0, pageSize: 10 });
-
-    const handlePageChange = (params) => {
-        setPaginationModel({ ...paginationModel, page: params.page });
-        onPageChange(params.page + 1);
-    };
-
     return (
         <Paper sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
                 hideFooter
-                paginationModel={paginationModel}
-                onPaginationModelChange={handlePageChange}
                 sx={{ border: 0 }}
             />
         </Paper>
