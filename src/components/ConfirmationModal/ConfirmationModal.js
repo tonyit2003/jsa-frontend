@@ -58,7 +58,7 @@ const ConfirmationModal = ({
     title = "Confirm Deletion",
     description = "Are you sure you want to delete this item? This action cannot be undone.",
     cancelText = "Cancel",
-    confirmText = "Delete",
+    confirmText = "Confirm",
     ...props
 }) => {
     const isMobile = useMediaQuery("(max-width:600px)");

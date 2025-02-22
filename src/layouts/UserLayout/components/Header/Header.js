@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     AppBar,
     Toolbar,
@@ -24,6 +24,7 @@ import { logo } from "~/assets/Images";
 import config from "~/config";
 import { UserContext } from "~/context/UserProvider";
 import { logoutUser } from "~/services/UserService";
+import useToken from "~/hooks/useToken";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
     backgroundColor: "#ffffff",
@@ -64,6 +65,7 @@ function Header() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const navigate = useNavigate();
+    const tokenStorage = useToken();
 
     // eslint-disable-next-line no-unused-vars
     const { auth, setAuth } = useContext(UserContext);
@@ -81,9 +83,7 @@ function Header() {
     };
 
     const handleLogout = async () => {
-        const token = localStorage.getItem(
-            process.env.REACT_APP_AUTH_TOKEN_KEY
-        );
+        const token = auth.token;
         if (!token) {
             return;
         }
@@ -116,6 +116,13 @@ function Header() {
         navItems = [...navItems, { text: "Đăng xuất", onClick: handleLogout }];
     }
 
+    useEffect(() => {
+        if (!tokenStorage && auth.isAuth && auth.token) {
+            handleLogout();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [tokenStorage]);
+
     const drawer = (
         <List>
             {navItems.map((item, index) => (
@@ -141,7 +148,7 @@ function Header() {
             ))}
             <ListItem>
                 {auth.isAuth ? (
-                    <ReservationButton variant="p" onClick={redirectLogin}>
+                    <ReservationButton variant="p" onClick={() => {}}>
                         {auth.email}
                     </ReservationButton>
                 ) : (
@@ -220,7 +227,7 @@ function Header() {
                             {auth.isAuth ? (
                                 <ReservationButton
                                     variant="p"
-                                    onClick={redirectLogin}
+                                    onClick={() => {}}
                                 >
                                     {auth.email}
                                 </ReservationButton>

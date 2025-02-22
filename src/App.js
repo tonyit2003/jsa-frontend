@@ -5,7 +5,6 @@ import DefaultLayout from "~/layouts";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
 import { publicRoutes, recruiterRoutes, adminRoutes } from "~/routes";
 import RecruiterRoutes from "./routes/RecruiterRoutes";
-
 function App() {
     return (
         <Router>
